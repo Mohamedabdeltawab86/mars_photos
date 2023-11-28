@@ -59,7 +59,7 @@ class MarsModel extends ChangeNotifier {
         : await repo.fetchLatestPhotos();
 
     isPhotosLoaded = true;
-    print(photos);
+    // print(photos);
     photosList.addAll(photos);
     notifyListeners();
   }

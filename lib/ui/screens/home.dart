@@ -47,6 +47,7 @@ class HomeBody extends StatelessWidget {
     if(scrollController.offset >=
         scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange){
+          print('Next Page');
       pageCount++;
      
     }
@@ -73,6 +74,7 @@ class HomeBody extends StatelessWidget {
                       if (rover == null) {
                         await model.fetchRoverData();
                       }
+                     
                       await model.pickDate(context, rover ?? model.rover!);
                     },
                   ),
@@ -89,6 +91,7 @@ class HomeBody extends StatelessWidget {
                         itemCount: model.photosList.length,
                         itemBuilder: (_, i) {
                           checkScrollPosition(model.photosList[i].earthDate);
+                           model.fetchMarsPhotos(model.photosList[i].earthDate, page: pageCount++);
 
                           return MarsPhotoCard(marsPhoto: model.photosList[i]);
                         },
