@@ -15,14 +15,12 @@ class MarsModel extends ChangeNotifier {
     fetchRoverData();
   }
 
+  final ScrollController scrollController = ScrollController();
+
   int pageCount = 1;
-
   List<MarsPhoto> photosList = [];
-
   bool isPhotosLoaded = false;
-
   Rover? rover;
-
   bool isDataReady = false;
 
   Future<void> fetchRoverData() async {
@@ -43,11 +41,10 @@ class MarsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ScrollController? scrollController;
-  void checkScrollPosition(DateTime earthDate) {
-    if (scrollController!.offset >=
-            scrollController!.position.maxScrollExtent &&
-        !scrollController!.position.outOfRange) {
+  void checkScrollPosition(DateTime? earthDate) {
+    if (scrollController.hasClients &&
+      scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
       fetchMarsPhotos(earthDate, page: pageCount++);
     }
     notifyListeners();

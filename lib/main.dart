@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDB();
+  Provider.debugCheckInvalidValueType = null;
   runApp(ChangeNotifierProvider(
     create: (context) => MarsModel(repo: Repo()),
     child: const MyApp()));
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           return Sizer(
             builder: (context, orientation, deviceType) {
               return MaterialApp.router(
-                title: "app title",
+                debugShowCheckedModeBanner: false,
+                title: "Mars Photo App",
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(lang),
